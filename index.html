@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Showcase4 — Идеи и Софт</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background: #0a0a0a; /* Darker background */
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      margin: 40px 0 20px;
+      color: #ff4136;
+      text-shadow: 0 0 10px rgba(255, 65, 54, 0.7);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px 0;
+      border: 5px solid #ff4136;
+      transition: all 0.5s ease;
+      box-shadow: 0 0 20px rgba(255, 65, 54, 0.5);
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.1) rotate(5deg);
+      border-color: #3b8cff;
+      box-shadow: 0 0 30px rgba(59, 140, 255, 0.7);
+    }
+
+    .about {
+      max-width: 700px;
+      font-size: 1.3em;
+      padding: 15px 30px;
+      color: #ddd;
+      font-family: 'Roboto', sans-serif;
+      background: rgba(10, 10, 10, 0.8);
+      border-radius: 15px;
+      margin: 20px 0;
+      animation: slideIn 1s ease-in-out;
+      backdrop-filter: blur(5px);
+    }
+
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ff4136, #ff6347);
+      color: #fff;
+      padding: 14px 32px;
+      margin: 15px;
+      border-radius: 50px;
+      font-size: 1.1em;
+      font-weight: 700;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(255, 65, 54, 0.5);
+      backdrop-filter: blur(2px);
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #3b8cff, #1f6be0);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(59, 140, 255, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .catalog-toggle {
+      background: linear-gradient(45deg, #3b8cff, #1f6be0);
+      color: #fff;
+      padding: 16px 40px;
+      font-size: 1.4em;
+      border-radius: 50px;
+      margin: 30px 0;
+      border: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 4px 15px rgba(59, 140, 255, 0.5);
+      backdrop-filter: blur(2px);
+    }
+
+    .catalog-toggle:hover {
+      background: linear-gradient(45deg, #ff4136, #ff6347);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 65, 54, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .catalog {
+      width: 90%;
+      max-width: 1000px;
+      display: none;
+      margin-bottom: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .catalog.active {
+      display: grid;
+    }
+
+    .product {
+      background: rgba(10, 10, 10, 0.9);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 20px rgba(59, 140, 255, 0.4);
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .product:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 30px rgba(255, 65, 54, 0.7);
+    }
+
+    .product h2 {
+      color: #ff6347;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+    }
+
+    .product p {
+      font-size: 1.1em;
+      color: #ddd;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 40px 0;
+      background: rgba(10, 10, 10, 0.9);
+      width: 100%;
+      border-top: 2px solid #ff4136;
+    }
+
+    footer h2 {
+      color: #ff4136;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5em;
+      }
+      .profile-photo {
+        width: 140px;
+        height: 140px;
+      }
+      .about {
+        font-size: 1.1em;
+        padding: 10px 20px;
+      }
+      .catalog-toggle {
+        font-size: 1.2em;
+        padding: 12px 30px;
+      }
+      .catalog {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2em;
+      }
+      .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+
+  <h1>Showcase4</h1>
+
+  <img src="https://i.ibb.co/ymJh93dZ/IMG-1443.jpg" alt="Фото" class="profile-photo" loading="lazy" />
+
+  <div id="about" class="about">
+    🔥 Showcase4 — только реальные идеи, лучшие предложения и топовый софт для твоей игры.
+  </div>
+
+  <button class="catalog-toggle" id="catalog-toggle">Показать каталог</button>
+
+  <div class="catalog" id="catalog">
+    <div class="product">
+      <h2>Soft iOS</h2>
+      <p>🛡 Софт под iOS без банов. AimDrag + WH. Поддержка всех версий. Цена — 800₽ / 5000₸. За покупкой — в Telegram!</p>
+    </div>
+    <div class="product">
+      <h2>Panel PC</h2>
+      <p>🖥 Панели с читами на ПК с разными функциями. Цена индивидуальна. Пиши в Telegram — расскажу всё.</p>
+    </div>
+  </div>
+
+  <div id="links" class="links">
+    <a class="btn" href="https://t.me/z4xhyz" target="_blank">Связь со мной</a>
+    <a class="btn" href="https://t.me/showcase4" target="_blank">Telegram канал</a>
+    <a class="btn" href="https://t.me/z4xshow" target="_blank">Отзывы</a>
+  </div>
+
+  <footer id="reviews">
+    <h2>Отзывы</h2>
+    <p><a class="btn" href="https://t.me/z4xshow" target="_blank">Открыть чат с отзывами</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Particle Background with Web-like Effect
+    particlesJS('particles-js', {
+      particles: {
+        number: { 
+          value: window.innerWidth > 768 ? 50 : 20, // Fewer particles on mobile
+          density: { enable: true, value_area: 1000 }
+        },
+        color: { value: ['#ff4136', '#3b8cff', '#ffffff'] },
+        shape: { type: 'circle' },
+        opacity: { value: 0.3, random: true },
+        size: { value: 2, random: true },
+        line_linked: {
+          enable: true,
+          distance: 200, // Longer distance for web-like effect
+          color: '#ffffff',
+          opacity: 0.15,
+          width: 1
+        },
+        move: { 
+          enable: true, 
+          speed: 1.5, // Slower movement for smoothness
+          direction: 'none', 
+          random: true,
+          out_mode: 'out'
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: { 
+          onhover: { enable: window.innerWidth > 768, mode: 'grab' }, // Disable hover on mobile
+          onclick: { enable: false } // Disable click to reduce CPU usage
+        },
+        modes: { grab: { distance: 200, line_linked: { opacity: 0.3 } } }
+      },
+      retina_detect: true
+    });
+
+    // Catalog Toggle
+    const toggleBtn = document.getElementById('catalog-toggle');
+    const catalog = document.getElementById('catalog');
+
+    toggleBtn.addEventListener('click', () => {
+      catalog.classList.toggle('active');
+      toggleBtn.textContent = catalog.classList.contains('active')
+        ? 'Скрыть каталог'
+        : 'Показать каталог';
+    });
+  </script>
+</body>
+</html>
